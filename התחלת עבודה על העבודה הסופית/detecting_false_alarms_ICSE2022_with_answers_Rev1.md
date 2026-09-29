@@ -599,6 +599,19 @@ the testing revision, is collected. This simulates real-world use of the
 tool, in which training is done on the history of the project, and then
 used at the time of the testing revision.
 
+# Figure 1: The dataset comprises warnings created before the training and testing revisions. The labels of each warning are determined by the closed-warning heuristic; if a warning is closed at the reference revision and the file has not been deleted, then it is actionable.
+
+```mermaid
+timeline
+    title Dataset Creation & Labeling Process
+    Training revision : Warnings created before this point are collected
+                      : Labels computed looking ahead to Reference revision
+    Testing revision (Simulated test time) : Warnings created before this point are collected
+                                          : Labels computed looking ahead to Reference revision
+    Reference revision : Ground truth oracle
+                       : Evaluates if warnings are closed and files still exist
+```
+
 Using the closed-warning heuristic as the warning oracle, each warning
 in a given revision is compared against a reference revision set in the
 future of the test revision. Prior studies selected a reference revision
