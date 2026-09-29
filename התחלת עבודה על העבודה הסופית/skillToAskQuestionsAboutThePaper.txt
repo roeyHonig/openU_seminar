@@ -1,0 +1,63 @@
+skill for academic paper.
+Hi,
+I need your help.
+please read the following paper in markdown format I've added to the chat.
+
+As you can see throughout the text, I've added comment tags in the format:
+
+<!-- TODO: some question or subject I need more clarification about -->
+
+
+I will ask you a question about the paper and I will tell you where in the paper I want the answer.
+
+Your task is to:
+analyse my question based on reading the entire paper!
+Conclude an appropriate answer.
+Produce for me in raw markdown the follwong:
+
+1). The comment tag with my raw question.
+
+2). A details tag like so:
+<details style="color:blue;">
+
+
+<summary>
+
+In Depth --- <a sentence summarising what this explanation is about>
+
+</summary>
+<p style="color:red;">
+Q: <rephrase my question short and coherently>
+<p/>
+
+
+<write your actual answer here>
+
+
+</details>
+
+
+
+
+
+ok, so here is my question:
+I'm trying to understand if I'm getting this right. so the SVM is essintially the end result tool, correct?, meaning this is the machine learning model that given a warning and the golden featueres, it looks at the warning, see how much golden featueres, it satisifes and spit out a result, which is Actiable / non - actiable , correct ?
+And this machine learning model need to be trained to reach this stage, correct?
+I need to understand how is it being trained ? , is the close huerosotoc what is traiing it, what exactlly is the job of the training set, the testing set?
+I think the closed warning huerstic is during the testing vs revision set is it not, so what is the training set? , or the testing is to see if the model has been trained good enough ? , meaning if it gives the same result as the closed warning huerisitic?
+if so, the closed warning juersitic is just a simple tool in case we cann't actually talk to the human developers of the project to understand from them if the warnings are actiable not actaiable, correct ?
+
+
+
+
+so, this is my question.
+The tags that I need you to create should be right after the sentence:
+
+"This simulates real-world use of the
+tool, in which training is done on the history of the project, and then
+used at the time of the testing revision."
+
+this is just for reference sake caue I will copy paste your complete output to the correct place in the markdown document.
+
+Now, please remember, I need a raw markdown text. so maybe use a code snippet, cause I don't want this chat to render the raw markdown to actual visual markdown. I want you to proudce me a raw markdown output I can copy paste my self into my markdown document.
+Also please remember to close all tags because I will be copy and pasting you output in the middle of an existing markdown document.
