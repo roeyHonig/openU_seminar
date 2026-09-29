@@ -626,7 +626,68 @@ warning is labelled unknown and is removed from the dataset.
 In other words, according to the closed-warning heuristic, a closed
 warning is always actionable as long as the file has not been deleted,
 and an open warning is always
-unactionable.<!-- TODO: interesting!, I need to know if I'm saying an original thought that is not in this paper, and if not that is also ok, just please let's make sure to reference, What I want to say is that it is interesting and can be further developed that if the warning persists in the futuer revision it doesn't mean it's not actiable but it could just mean the developer feel it is too resky to fix. I need to know if the paper adress this in any kind -->
+unactionable.
+<!-- TODO: I'm trying to understand if I'm getting this right. so the SVM is essintially the end result tool, correct?, meaning this is the machine learning model that given a warning and the golden featueres, it looks at the warning, see how much golden featueres, it satisifes and spit out a result, which is Actiable / non - actiable , correct ?
+And this machine learning model need to be trained to reach this stage, correct?
+I need to understand how is it being trained ? , is the close huerosotoc what is traiing it, what exactlly is the job of the training set, the testing set?
+I think the closed warning huerstic is during the testing vs revision set is it not, so what is the training set? , or the testing is to see if the model has been trained good enough ? , meaning if it gives the same result as the closed warning huerisitic?
+if so, the closed warning juersitic is just a simple tool in case we cann't actually talk to the human developers of the project to understand from them if the warnings are actiable not actaiable, correct ? -->
+
+
+<details style="color:blue;">
+
+
+<summary>
+
+In Depth --- How are the Golden Features, the SVM, the training set, the testing set, and the closed-warning heuristic connected?
+
+</summary>
+<p style="color:red;">
+Q: Is the SVM the final machine-learning model that receives the Golden Features of a warning and predicts whether the warning is actionable or a false alarm? How is the SVM trained, what are the roles of the training and testing datasets, and how does the closed-warning heuristic provide the labels?
+<p/>
+
+Yes — your overall understanding is very close, but there is one extremely important distinction to make:
+
+**The SVM is the machine-learning classifier that ultimately makes the prediction. The Golden Features are its inputs. The closed-warning heuristic is not the SVM itself; it is the mechanism used in this study to create the labels that tell the SVM what the "answer" was for historical warnings.**
+
+The complete idea can be understood as four stages:
+
+```text
+Historical project warnings
+          |
+          v
+Closed-warning heuristic
+          |
+          v
+Actionable / False alarm labels
+          |
+          v
+Training dataset
+          |
+          v
+      Train SVM
+          |
+          v
+ SVM learns relationship between
+ Golden Features and the labels
+          |
+          v
+     Trained SVM
+          |
+          v
+New warning
+    |
+    v
+Calculate its Golden Features
+    |
+    v
+     SVM
+    |
+    v
+Actionable / False alarm
+```
+</details>
+<!-- TODO: interesting!, I need to know if I'm saying an original thought that is not in this paper, and if not that is also ok, just please let's make sure to reference, What I want to say is that it is interesting and can be further developed that if the warning persists in the futuer revision it doesn't mean it's not actiable but it could just mean the developer feel it is too resky to fix. I need to know if the paper adress this in any kind -->
 
 
 <details style="color:blue;">
