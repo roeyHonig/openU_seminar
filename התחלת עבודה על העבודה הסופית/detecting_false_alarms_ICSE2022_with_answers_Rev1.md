@@ -989,7 +989,7 @@ actionable." The ROC curve plots:
 
 A perfect classifier reaches the top-left corner:
 
- text
+```text
 True Positive Rate
 1.0 |       ●──────
     |      /
@@ -998,7 +998,7 @@ True Positive Rate
 0.0 |───●────────────
     0.0          1.0
        False Positive Rate
-
+```
 
 The **area under that curve is AUC**. AUC = 1 means perfect separation;
 AUC ≈ 0.5 means no useful separation. Thus AUC is not simply another
@@ -1034,14 +1034,14 @@ snapshots/points in the project's version history**.
 
 Chronologically:
 
- text
+```text
 PAST                                      FUTURE
   |                                         |
   v                                         v
 [Training revision] → [Testing revision] → [Reference revision]
        learn from          evaluate on          create labels
        this data           this data             using future
-
+```
 
 The training revision is before the testing revision. The reference
 revision is even later---typically **2 years after the testing
@@ -1184,7 +1184,7 @@ numerical/features that the machine-learning model will receive**.
 
 Conceptually:
 
- text
+```text
 Raw warning + source code + project history
                  ↓
           Feature extractor
@@ -1194,7 +1194,7 @@ Raw warning + source code + project history
                 SVM
                  ↓
        actionable / false alarm
-
+```
 
 The authors inspected Wang et al.'s feature-extraction implementation
 and discovered that five features were calculated using information that
@@ -1235,7 +1235,7 @@ That heuristic looks at the future reference revision.
 
 So information flows like this:
 
- text
+```text
 Future reference revision
           ↓
 closed-warning heuristic
@@ -1245,7 +1245,7 @@ labels of warnings
 Golden Feature for W
           ↓
 classifier predicts W
-
+```
 
 The problem is that the future label of W itself can be included in the
 feature calculation. The classifier therefore receives information
@@ -1493,12 +1493,12 @@ The duplication is a second, separate experimental flaw.
 
 Suppose:
 
- text
+```text
 Training revision       Testing revision
       |                       |
       W  --------------------> W
    same warning            same warning
-
+```
 
 The same warning can appear in both datasets because the researchers
 included **all warnings present at both snapshots**. If a warning exists
@@ -1566,7 +1566,7 @@ Q: I need a simple chart showing me chronological when are the different revisio
 
 Here is the chronological picture:
 
- text
+```text
                     FUTURE
                       |
                       v
@@ -1576,7 +1576,7 @@ Here is the chronological picture:
        W -------------------->W                    W
        same warning can appear in BOTH
        training and testing
-
+```
 
 For example, if warning **W** exists at the training revision and
 remains present at the testing revision, then **W is included in both
@@ -1635,7 +1635,7 @@ that training warning's label.
 
 So:
 
- text
+```text
 Test warning
     ↓
 Find same class + bug pattern in training
@@ -1645,7 +1645,7 @@ Found? ── Yes → copy its label
     No
     ↓
 predict majority class
-
+```
 
 This very simple method gets **F1 = 0.75**, which is surprisingly
 strong. It even beats the Golden Features SVM after the leaked features
@@ -1694,12 +1694,12 @@ Yes. That sentence captures the core duplication problem.
 Chronologically, the training revision comes first and the testing
 revision later:
 
- text
+```text
 Training revision ─────────────→ Testing revision
        W                              W
        |______________________________|
               same warning
-
+```
 
 The researchers included **all warnings at both points**, so warnings
 that persisted from training into testing were present in both datasets.
