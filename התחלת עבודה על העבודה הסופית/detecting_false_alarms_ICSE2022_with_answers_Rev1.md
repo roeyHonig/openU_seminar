@@ -1687,14 +1687,36 @@ studies.
 # Figure 3: We reimplemented the leaked features. The reimplemented features use only information (represented by the blue, dashed lines) available at the present (i.e., either the training or test revision) to determine if a warning (i.e., created before the training or test revision) has been closed. Under this setting, no information from the reference revision is used for making predictions.
 
 ```mermaid
-timeline
-    title Reimplemented Realistic Feature Computation (No Data Leakage)
-    Training revision : Collect warnings (created before Training revision)
-                      : Compute features using ONLY past/present information (Blue dashed arrow)
-    Testing revision (Simulated test time) : Collect warnings (created before Testing revision)
-                                          : Compute features using ONLY past/present information (Blue dashed arrow)
-    Reference revision : Ignored for feature computation
-                       : No future information leakage
+graph TD
+    %% Node Definitions
+    Past[Past / History]
+    TR[Training Revision]
+    TS["Testing Revision<br/>(Simulated Test Time)"]
+    REF[Reference Revision]
+
+    %% Timeline Layout (Left to Right)
+    Past --- TR --- TS --- REF
+
+    %% Collection Flow (Black Solid Arrows -> Future)
+    Past ==>|"Collect warnings"| TR
+    TR ==>|"Collect warnings"| TS
+
+    %% Feature Computation (BLUE DASHED ARROWS -> PAST ONLY)
+    TR -.-|"<b>Compute Features (Past Only)</b>"| Past
+    TS -.-|"<b>Compute Features (Past Only)</b>"| TR
+
+    %% Styling
+    classDef past fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef revision fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    classDef refRev fill:#eee,stroke:#aaa,stroke-width:1px,stroke-dasharray: 5 5;
+
+    class Past past;
+    class TR,TS revision;
+    class REF refRev;
+
+    %% Color Blue Dashed Links
+    linkStyle 4 stroke:#1e88e5,stroke-width:3px,stroke-dasharray: 6 6;
+    linkStyle 5 stroke:#1e88e5,stroke-width:3px,stroke-dasharray: 6 6;
 ```
 
 > All warnings reported by FindBugs on both the training and testing
