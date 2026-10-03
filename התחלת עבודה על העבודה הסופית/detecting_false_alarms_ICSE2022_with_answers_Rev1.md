@@ -1416,7 +1416,22 @@ achieves performance comparable to the use of the Golden Features. An
 SVM using the leaked features has a Precision of 0.79, about 0.10 lower
 than the Golden Features SVM, however, they achieve identical Recall of
 0.94, which results in an F1 of 0.83, just 0.05 lower than the Golden
-Features. This indicates that the strong performance of the Golden
+Features.
+
+# Figure 2: The warning context and defect likelihood features use labels derived through the closed-warning heuristic, using information from the reference revision, chronologically in the future of the test revision. In a realistic setting, this information will not be present at test time.
+
+```mermaid
+timeline
+    title Unrealistic Label Information Flow during Testing
+    Testing revision (Simulated Test Time) : Warnings are collected UP TO this point (Realistic)
+                                          : Labels MUST be computed using *current* data
+    [Simulated Timeline] : (Moving forward in simulated time)
+    Reference revision : Labels are Computed Looking BACK to this Future Point
+                       : (This is the Source of the Label/Leakage)
+
+```
+
+This indicates that the strong performance of the Golden
 Features in the experiments depends largely on the leaked features, and
 is an optimistic estimate of their
 effectiveness.<!-- TODO: I need an explanation for this pragraph -->
