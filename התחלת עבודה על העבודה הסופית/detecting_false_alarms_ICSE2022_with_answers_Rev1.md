@@ -1989,6 +1989,21 @@ before 2014-01-01.
 | tomcat | 226 | 42 | 0.53 (0.59) | 0.51 | 61 | 0.51 (0.57) | 0.48 | 52 | 0.64 (0.69) | 0.54 |
 | Average | 311 | 40 | 0.39 (0.43) | 0.54 | 42 | 0.48 (0.55) | 0.53 | 54 | 0.57 (0.67) | 0.54 |
 
+
+# Figure 4: Example of code that Findbugs reports a warning on. Findbugs warns against using new Long, recommending the more efficient Long.valueOf to instantiate a Long object.
+
+```java
+// remove the old entry in the Conglomerate directory, and add the
+// new one.
+if (is_temporary)
+{
+    // remove old entry in the Conglomerate directory, and add new one
+    if (tempCongloms != null)
+        tempCongloms.remove(new Long(conglomId));
+    tempCongloms.put(new Long(conglomId), conglom);
+}
+```
+
 ### 5.2 Unconfirmed actionable warnings
 
 Next, we investigate if closed warnings are truly actionable warnings. A
@@ -2098,6 +2113,22 @@ where a warning could be incidentally removed through code modification
 that does not fix the bug indicated by the warning. Our results indicate
 that more information should be considered, and that the heuristic may
 not be sufficiently robust.
+
+# Figure 5: The warning from Figure 4 is removed through a change in functionality, unrelated to the warning otherwise.
+
+```diff
+- // remove the old entry in the Conglomerate directory, and add the
+- // new one.
+- if (is_temporary)
++ // Set an indication that ALTER TABLE has been called so that the
++ // conglomerate will be invalidated if an error happens. Only needed
++ // for non-temporary conglomerates, since they are the only ones that
++ // live in the conglomerate cache.
++ if (!is_temporary)
+  {
+-     tempCongloms.put(new Long(conglomId), conglom);
+- }
+```
 
 > Only 47% of closed warnings were labelled actionable by human
 > annotators, implying that many closed warnings are not actionable.
