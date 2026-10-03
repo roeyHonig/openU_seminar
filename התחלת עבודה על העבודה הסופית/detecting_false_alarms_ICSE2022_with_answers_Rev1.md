@@ -1684,6 +1684,18 @@ strong performance on a dataset with data duplication. Therefore, we
 conclude that the data duplication between the training and testing
 dataset contributes to the strong performance observed in previous
 studies.
+# Figure 3: We reimplemented the leaked features. The reimplemented features use only information (represented by the blue, dashed lines) available at the present (i.e., either the training or test revision) to determine if a warning (i.e., created before the training or test revision) has been closed. Under this setting, no information from the reference revision is used for making predictions.
+
+```mermaid
+timeline
+    title Reimplemented Realistic Feature Computation (No Data Leakage)
+    Training revision : Collect warnings (created before Training revision)
+                      : Compute features using ONLY past/present information (Blue dashed arrow)
+    Testing revision (Simulated test time) : Collect warnings (created before Testing revision)
+                                          : Compute features using ONLY past/present information (Blue dashed arrow)
+    Reference revision : Ignored for feature computation
+                       : No future information leakage
+```
 
 > All warnings reported by FindBugs on both the training and testing
 > revisions were included in the datasets. Warnings reported at the
