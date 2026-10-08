@@ -1805,7 +1805,27 @@ for the testing revision, we consider only warnings created after the
 training revision to prevent data duplication. Consequently, we found
 fewer newly created warnings in the short time interval between the
 training and testing revisions.
+<!-- TODO: I understood the steps the autors took to elimnate data duplication but I need to further understand in simple words what are the steps they took to elimnate data leakage -->
 
+<details style="color:blue;">
+
+<summary>
+
+In Depth --- Steps taken by the authors to eliminate data leakage
+
+</summary>
+<p style="color:red;">
+Q: What specific steps did the authors take to eliminate data leakage in their experiments?
+<p/>
+
+To eliminate data leakage, the authors addressed the fundamental flaw where input features were calculated using **future knowledge** (labels obtained from looking at a 2-year-later reference revision)[cite: 1]. They restructured both feature computation and dataset evaluation as follows[cite: 1]:
+
+1. **Removed Leaked Features in Baseline Experiments:** First, they completely removed the 5 problematic features—*warning context in method*, *warning context in file*, *warning context for warning type*, *defect likelihood for warning pattern*, and *discretization of defect likelihood*—to measure model performance without any leaked future information[cite: 1].
+2. **Eliminated Look-Ahead Labels:** They stopped using the future reference revision (2 years ahead) to determine whether a warning in a population was actionable or a false alarm during feature extraction[cite: 1].
+3. **Reimplemented Features Using Past-Only History:** They redesigned the warning context and defect likelihood features so that feature calculations rely solely on data available at the prediction time (the training or testing revision)[cite: 1]. Specifically, they only examined warnings introduced within the **1 year prior** to the given revision and checked if FindBugs reported them at that current revision[cite: 1].
+4. **Strict Temporal Isolation:** By looking strictly backward into past repository history, no information from future commits or future reference revisions could seep into the model inputs[cite: 1].
+
+</details>
 Note that after reimplementing the warning context and defect likelihood
 features, we could not run the experiments for the project Phoenix as we
 faced many difficulties building old versions of the project. Moreover,
