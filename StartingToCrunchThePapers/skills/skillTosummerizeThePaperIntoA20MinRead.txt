@@ -1,0 +1,31 @@
+I need your help.
+I want to share with you an academic paper.
+This paper was translated by me from PDF format to markdown.
+In the markdown text, you will find the original text, formulas, tables and figures.
+You will also find my own personal questions regarding the text that I have later gather answers to.
+For example, you will find comments tags such as:
+
+<!-- TODO: some question-->
+
+Usually, next to the comment tags you can also find the answers to the question in the form of:
+
+<details style="color:blue;">
+<summary>
+In Depth --- A short explanation of the question
+</summary>
+<p style="color:red;">
+Q: A detailed explanation of the question
+<p/>
+The answer itself
+</details>
+
+I want you to read the markdown (attached in this chat) and transform it into a 20 minutes read document.
+
+Here are the instructions:
+No need for comment tags or the questions or answers tags. Only have text , tables , figures , formulas and other original components of the text.
+You are supposed to summarise the original text combining my questions and answers to make sure the text is understood.
+Remember I need from you the full raw markdown text. meaning, I'd like to have a code snippet with the full raw markdown text, so I can copy paste into a new markdown document I'll create on my local machine. Again, the raw markdown text, cause I don't want the chat to render tables or images. I need the raw markdown text.
+
+Here are some more specific instructions regarding this specific paper.
+I want major emphasis and coverage especially on sections 3,4 and 5.
+section 1 and 2 should get moderate coverage and section 6,7 and 8 should get minor coverage.
