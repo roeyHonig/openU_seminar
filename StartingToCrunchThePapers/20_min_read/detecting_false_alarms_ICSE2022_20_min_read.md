@@ -211,9 +211,7 @@ A **false positive** occurs when the classifier predicts that a warning is actio
 
 Precision measures how often warnings predicted to be actionable really are actionable.
 
-\[
-\text{Precision} = \frac{TP}{TP+FP}
-\]
+Precision = TP / (TP + FP)
 
 High Precision means developers can place greater confidence in warnings that the classifier recommends addressing.
 
@@ -221,9 +219,7 @@ High Precision means developers can place greater confidence in warnings that th
 
 Recall measures how many of all genuinely actionable warnings the classifier successfully identifies.
 
-\[
-\text{Recall} = \frac{TP}{TP+FN}
-\]
+Recall = TP / (TP + FN)
 
 High Recall means the classifier misses relatively few actionable warnings.
 
@@ -231,11 +227,7 @@ High Recall means the classifier misses relatively few actionable warnings.
 
 F1 combines Precision and Recall through their harmonic mean:
 
-\[
-F1 = 2 \times
-\frac{\text{Precision}\times\text{Recall}}
-{\text{Precision}+\text{Recall}}
-\]
+F1 = 2 × Precision × Recall / (Precision + Recall)
 
 F1 ranges from 0 to 1. It is especially useful when both Precision and Recall matter and the classes are imbalanced.
 
